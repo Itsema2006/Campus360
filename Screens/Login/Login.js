@@ -13,16 +13,17 @@ import {
   StatusBar,
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
+import { useNavigation } from '@react-navigation/native';
 const { width, height } = Dimensions.get('window');
 const isWeb = Platform.OS === 'web';
 const isMobile = width < 768;
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  
 
   const users = [
   {
@@ -73,7 +74,7 @@ const LoginScreen = () => {
     case "student":
       console.log("Logged in as Student");
       alert("Welcome Student");
-      // navigation.navigate("StudentDashboard");
+      navigation.navigate("StudentMain");
       break;
 
     case "parent":
@@ -85,6 +86,7 @@ const LoginScreen = () => {
     default:
       alert("Unknown role");
   }
+
 };
 
 
@@ -155,8 +157,9 @@ const LoginScreen = () => {
         <Text style={styles.checkboxLabel}>Keep me logged in on this device</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
-        <Text style={styles.signInButtonText}>Sign In to Portal</Text>
+      <TouchableOpacity  
+      style={styles.signInButton} onPress={handleLogin}>
+        <Text  style={styles.signInButtonText}>Sign In to Portal</Text>
         <Ionicons name="arrow-forward" size={20} color="#FFFFFF" style={styles.arrowIcon} />
       </TouchableOpacity>
 
